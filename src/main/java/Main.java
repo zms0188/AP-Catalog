@@ -3,9 +3,7 @@
  */
 import java.sql.*;
 
-/**
- * Created by cube on 21.01.2017.
- */
+
 public class Main {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/test_db";
     private static final String USER_NAME = "root";
