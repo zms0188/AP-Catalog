@@ -3,6 +3,8 @@ package com.autoparts.dao.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by zms01 on 04.07.2017.
@@ -19,6 +21,21 @@ public  class Category{
     }
     public Category(Category c){
         title = c.getTitle();
+    }
+
+    private Set<Autopart> autoparts = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "category")
+    public Set<Autopart> getAutoparts() {
+        return this.autoparts;
+    }
+
+    public void setAutoparts(Set<Autopart> autoparts) {
+        this.autoparts = autoparts;
+    }
+
+    public void addAutoparts(Autopart autopart) {
+        autopart.setCategory(this);
+        this.autoparts.add(autopart);
     }
     @Id
     @GeneratedValue(generator = "increment")

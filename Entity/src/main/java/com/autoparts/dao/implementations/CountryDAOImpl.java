@@ -8,7 +8,9 @@ import com.autoparts.dao.HibernateUtil;
 
 import com.autoparts.dao.entity.Country;
 import com.autoparts.dao.interfaces.CountryDAO;
+import org.hibernate.Query;
 import org.hibernate.Session;
+
 
 import javax.swing.*;
 
@@ -51,8 +53,12 @@ public class CountryDAOImpl implements CountryDAO {
         Session session = null;
         Country country = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            country = (Country) session.load(Country.class, id);
+            session = HibernateUtil.getSessionFactory().openSession();{
+                Query query = session.createQuery("FROM Country WHERE id =:paramId");
+                query.setParameter("paramId",id);
+                country = (Country)query.uniqueResult();
+            }
+
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Ошибка I/O", JOptionPane.OK_OPTION);
         }finally {

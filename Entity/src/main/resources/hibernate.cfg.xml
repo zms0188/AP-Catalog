@@ -14,7 +14,8 @@
         <property name="hibernate.connection.autocommit">false</property>
         <property name="current_session_context_class">thread</property>
 
-        <mapping class="com.autoparts.dao.entity.Autopart"/>
+        <mapping class="com.autoparts.dao.entity.Country"/>
+        <mapping class="com.autoparts.dao.entity.Manufacturer"/>
 
     </session-factory>
 </hibernate-configuration>

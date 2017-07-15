@@ -6,7 +6,11 @@
 
     <groupId>AP-Catalog</groupId>
     <artifactId>AP-Catalog</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>WebApp</module>
+    </modules>
     <properties>
         <hibernate-version>5.0.1.Final</hibernate-version>
     </properties>

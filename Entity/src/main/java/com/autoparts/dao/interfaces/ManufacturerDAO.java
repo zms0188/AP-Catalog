@@ -5,6 +5,7 @@ import com.autoparts.dao.entity.Manufacturer;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by zms01 on 03.07.2017.
@@ -15,4 +16,5 @@ public interface ManufacturerDAO {
     public Manufacturer getManufacturerById(Long id) throws SQLException;
     public List getAllManufacturers()throws SQLException;
     public void deleteManufacturer(Manufacturer manufacturer)throws SQLException;
+    public Set<Manufacturer> getCountries(Long countryId) throws SQLException;
 }

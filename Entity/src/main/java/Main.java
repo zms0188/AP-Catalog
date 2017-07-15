@@ -1,55 +1,49 @@
 /**
  * Created by zms01 on 20.06.2017.
  */
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import com.autoparts.dao.Factory;
+import com.autoparts.dao.entity.Automobile;
 import com.autoparts.dao.entity.Autopart;
 import com.autoparts.dao.entity.Country;
 import com.autoparts.dao.entity.Manufacturer;
 import org.hibernate.annotations.GenericGenerator;
+import com.autoparts.dao.HibernateUtil;
 
 import javax.persistence.*;
 import java.sql.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        Autopart a1 = new Autopart();
-        Autopart a2 = new Autopart();
-        Autopart a3 = new Autopart();
-        Autopart a4 = new Autopart();
-        Autopart a5 = new Autopart();
-        Autopart a6 = new Autopart();
-        Autopart a7 = new Autopart();
-        Autopart a8 = new Autopart();
 
-        a1.setTitle("Вал распределительный"); a1.setPrice(788.00);
-        a2.setTitle("Катаколлектор");a2.setPrice(3100.00);
-        a3.setTitle("Подушки стабилизатора");a3.setPrice(44.20);
-        a4.setTitle("Вал коленчатый");a4.setPrice(2250.74);
-        a5.setTitle("Резина 225/50 R 16");a5.setPrice(2100.00);
-        a6.setTitle("Глушитель основной");a6.setPrice(678.00);
-        a7.setTitle("Уплотнитель багажника");a7.setPrice(210.50);
-        a8.setTitle("Ролик ГРМ");a8.setPrice(410.00);
+        Country country = Factory.getInstance().getCountryDAO().getCountryById((long) 1);
+        Manufacturer manufacturer = Factory.getInstance().getManufacturerDAO().getManufacturerById((long) 2);
+        Manufacturer manufacturer1 = Factory.getInstance().getManufacturerDAO().getManufacturerById((long) 5);
+        Set<Manufacturer> manufacturers = new HashSet<>();
+        manufacturers.add(manufacturer);
+        manufacturers.add(manufacturer1);
 
 
-
-        Factory.getInstance().getAutopartDAO().addAutopart(a1);
-        Factory.getInstance().getAutopartDAO().addAutopart(a2);
-        Factory.getInstance().getAutopartDAO().addAutopart(a3);
-        Factory.getInstance().getAutopartDAO().addAutopart(a4);
-        Factory.getInstance().getAutopartDAO().addAutopart(a5);
-        Factory.getInstance().getAutopartDAO().addAutopart(a6);
-        Factory.getInstance().getAutopartDAO().addAutopart(a7);
-        Factory.getInstance().getAutopartDAO().addAutopart(a8);
+        country.setManufacturers(manufacturers);
+        Factory.getInstance().getCountryDAO().updateCountry(country);
 
 
-        List<Autopart> autoparts = Factory.getInstance().getAutopartDAO().getAllAutoparts();
+        List<Manufacturer> manufacturers2 = Factory.getInstance().getManufacturerDAO().getAllManufacturers();
         System.out.println("=======All Autoparts=====");
-        for (int i = 0; i < autoparts.size(); i++) {
-            System.out.println("Autopart name is: " + autoparts.get(i).getTitle() +"Price is: "+autoparts.get(i).getPrice());
+        for (int i = 0; i < manufacturers2.size(); i++) {
+            System.out.println("Autopart name is: " + manufacturers2.get(i).getTitle() + " Price is: " + manufacturers2.get(i).getCountry());
         }
     }
 }
+
+
+
+
 
 
